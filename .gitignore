@@ -1,0 +1,78 @@
+# Proyecto Scala/SBT + IntelliJ
+
+# --- SBT / Scala build outputs ---
+/target/
+/project/target/
+/project/project/
+/project/boot/
+/lib_managed/
+/src_managed/
+/out/
+dist/
+*.class
+*.log
+hs_err_pid*
+
+# --- BSP / Scala tooling ---
+/.bsp/
+/.bloop/
+/.metals/
+/project/metals.sbt
+
+# --- Caches locales accidentales en el workspace ---
+# En este repo ya existe una cache de Coursier bajo `null/`; no conviene versionarla.
+/null/
+
+# --- IntelliJ / JetBrains (mantener solo configuracion compartible) ---
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries/
+.idea/**/shelf/
+.idea/**/aws.xml
+.idea/**/contentModel.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+.idea/**/gradle.xml
+.idea/**/libraries/
+.idea/**/modules/
+.idea/**/mongoSettings.xml
+.idea/**/sonarlint/
+.idea/**/httpRequests/
+.idea/**/caches/build_file_checksums.ser
+.idea/**/copilot.data.migration.ask2agent.xml
+.idea_modules/
+*.iml
+*.ipr
+
+# --- Archivos temporales y del sistema operativo ---
+*~
+*.stackdump
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+

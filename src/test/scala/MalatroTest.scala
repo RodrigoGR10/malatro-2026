@@ -16,12 +16,12 @@ class MalatroTest extends FunSuite {
     hand = new Hand()
   }
 
-  test("Score se crea correctamente") {
+  test("Score se crea correctamente con chips y multiplicador") {
     assertEquals(score.chips, 100)
     assertEquals(score.mult, 5)
   }
 
-  test("Card se crea correctamente") {
+  test("Card se crea correctamente con rango y pinta") {
     assertEquals(asH.rank, Ace)
     assertEquals(asH.suit, Heart)
   }
@@ -53,7 +53,7 @@ class MalatroTest extends FunSuite {
     assertEquals(Two.clasificacion, Par)
   }
 
-  test("Jokers son objetos distintos") {
+  test("Jokers son objetos distintos entre sí") {
     assertNotEquals(GreedyJoker, DeviousJoker)
     assertNotEquals(GreedyJoker, EvenSteven)
     assertNotEquals(GreedyJoker, ScaryFace)

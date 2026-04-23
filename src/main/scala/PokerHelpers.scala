@@ -1,4 +1,6 @@
 package cl.uchile.dcc
+import rango.Ace
+import rango.Rank
 
 object PokerHelpers {
 

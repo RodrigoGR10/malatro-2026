@@ -1,5 +1,8 @@
 package cl.uchile.dcc
 import munit.FunSuite
+import rango.{Ace, Two, King, Impar, Figura, Par}
+import pinta.{Hearts, Diamonds, Spades}
+import cl.uchile.dcc.{GreedyJoker, DeviousJoker, EvenSteven, ScaryFace}
 
 class MalatroTest extends FunSuite {
   var score: Score = _
@@ -9,11 +12,11 @@ class MalatroTest extends FunSuite {
   var hand: Hand = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    score = new Score(100, 5)
-    asH = new Card(Ace, Heart)
-    twoD = new Card(Two, Diamond)
-    kingS = new Card(King, Spade)
-    hand = new Hand()
+    score = Score(100, 5)
+    asH = Card(Ace, Hearts)
+    twoD = Card(Two, Diamonds)
+    kingS = Card(King, Spades)
+    hand = Hand()
   }
 
   test("Score se crea correctamente con chips y multiplicador") {
@@ -23,12 +26,12 @@ class MalatroTest extends FunSuite {
 
   test("Card se crea correctamente con rango y pinta") {
     assertEquals(asH.rank, Ace)
-    assertEquals(asH.suit, Heart)
+    assertEquals(asH.suit, Hearts)
   }
 
   test("Dos Cards con mismo rango y pinta son iguales") {
-    val c1 = new Card(Ace, Heart)
-    val c2 = new Card(Ace, Heart)
+    val c1 = Card(Ace, Hearts)
+    val c2 = Card(Ace, Hearts)
     assertEquals(c1, c2)
   }
 
@@ -54,8 +57,8 @@ class MalatroTest extends FunSuite {
   }
 
   test("Jokers son objetos distintos entre sí") {
-    assertNotEquals(GreedyJoker, DeviousJoker)
-    assertNotEquals(GreedyJoker, EvenSteven)
-    assertNotEquals(GreedyJoker, ScaryFace)
+    assert(GreedyJoker != DeviousJoker)
+    assert(GreedyJoker != EvenSteven)
+    assert(GreedyJoker != ScaryFace)
   }
 }

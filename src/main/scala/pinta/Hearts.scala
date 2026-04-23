@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package pinta
 
-case object Hearts {
+case object Hearts extends Pinta {
 
 }

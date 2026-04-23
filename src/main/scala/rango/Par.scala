@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package rango
 
-object Par extends ClasificacionRango {
+case object Par extends ClasificacionRango {
 
 }

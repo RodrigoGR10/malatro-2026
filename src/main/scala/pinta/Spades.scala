@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package pinta
 
-object Spades {
+case object Spades {
 
 }

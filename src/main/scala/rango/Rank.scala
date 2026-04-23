@@ -2,7 +2,7 @@ package cl.uchile.dcc
 package rango
 
 trait Rank {
-  def orden: Int
-  def valor: Int
-  def clasificacion: ClasificacionRango
+  val orden: Int
+  val valor: Int
+  val clasificacion: ClasificacionRango
 }

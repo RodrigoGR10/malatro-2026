@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package pinta
 
-object Diamonds {
+case object Diamonds {
 
 }

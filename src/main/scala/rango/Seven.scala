@@ -1,8 +1,8 @@
 package cl.uchile.dcc
 package rango
 
-object Seven extends Rank {
-  def orden: Int = 7
-  def valor: Int = 7
-  def clasificacion: ClasificacionRango = Impar
+case object Seven extends Rank {
+  val orden: Int = 7
+  val valor: Int = 7
+  val clasificacion: ClasificacionRango = Impar
 }

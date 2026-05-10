@@ -1,9 +1,6 @@
 package cl.uchile.dcc
 
-class Hand(
-            private var _cards: List[Card] = List.empty,
-            private var _jokers: List[Joker] = List.empty
-          ) {
+class Hand(private var _cards: List[Card] = List.empty, private var _jokers: List[Joker] = List.empty) {
 
   def cards: List[Card] =
     _cards
@@ -15,16 +12,22 @@ class Hand(
     _cards = _cards :+ card
 
   def removeCard(index: Int): Unit = {
-    val (before, after) = _cards.splitAt(index)
-    _cards = before ++ after.tail
+    var result: List[Card] = List.empty
+    for i <- 0 until _cards.size do
+      if i != index then
+        result = result :+ _cards(i)
+    _cards = result
   }
 
   def addJoker(joker: Joker): Unit =
     _jokers = _jokers :+ joker
 
   def removeJoker(index: Int): Unit = {
-    val (before, after) = _jokers.splitAt(index)
-    _jokers = before ++ after.tail
+    var result: List[Joker] = List.empty
+    for i <- 0 until _jokers.size do
+      if i != index then
+        result = result :+ _jokers(i)
+    _jokers = result
   }
 
   def playHand(indices: List[Int]): List[Card] = {
@@ -34,7 +37,10 @@ class Hand(
 
     var remaining: List[Card] = List.empty
     for i <- 0 until _cards.size do
-      if !indices.contains(i) then
+      var isPlayed = false
+      for j <- indices do
+        if j == i then isPlayed = true
+      if !isPlayed then
         remaining = remaining :+ _cards(i)
 
     _cards = remaining

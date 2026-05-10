@@ -7,5 +7,5 @@ object StraightFlush extends PokerCombination {
 
   // Válida si es escalera Y color al mismo tiempo
   def matches(cards: List[Card]): Boolean =
-    PokerHelpers.isStraight(cards) && PokerHelpers.isFlush(cards)
+    Straight.matches(cards) && Flush.matches(cards)
 }

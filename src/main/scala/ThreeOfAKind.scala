@@ -7,6 +7,5 @@ object ThreeOfAKind extends PokerCombination {
 
   // Válida si existe algún rango con 3 o más cartas
   def matches(cards: List[Card]): Boolean =
-    PokerHelpers.validHand(cards) &&
-      PokerHelpers.rankCounts(cards).values.exists(_ >= 3)
+    PokerHelpers.validHand(cards) && PokerHelpers.rankCounts(cards).values.exists(_ >= 3)
 }

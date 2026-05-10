@@ -1,8 +1,48 @@
 package cl.uchile.dcc
-import pinta.Pinta
-import rango.Rank
-import cl.uchile.dcc.Joker
-//Representa la mano del jugador (cartas y jokers)
-case class Hand(val cards: List[Card] = List.empty, val jokers: List[Joker] = List.empty) {
 
+class Hand(
+            private var _cards: List[Card] = List.empty,
+            private var _jokers: List[Joker] = List.empty
+          ) {
+
+  def cards: List[Card] =
+    _cards
+
+  def jokers: List[Joker] =
+    _jokers
+
+  def addCard(card: Card): Unit =
+    _cards = _cards :+ card
+
+  def removeCard(index: Int): Unit = {
+    val (before, after) = _cards.splitAt(index)
+    _cards = before ++ after.tail
+  }
+
+  def addJoker(joker: Joker): Unit =
+    _jokers = _jokers :+ joker
+
+  def removeJoker(index: Int): Unit = {
+    val (before, after) = _jokers.splitAt(index)
+    _jokers = before ++ after.tail
+  }
+
+  def playHand(indices: List[Int]): List[Card] = {
+    var played: List[Card] = List.empty
+    for i <- indices do
+      played = played :+ _cards(i)
+
+    var remaining: List[Card] = List.empty
+    for i <- 0 until _cards.size do
+      if !indices.contains(i) then
+        remaining = remaining :+ _cards(i)
+
+    _cards = remaining
+    played
+  }
+}
+
+object Hand {
+  def apply(cards: List[Card] = List.empty, jokers: List[Joker] = List.empty): Hand =
+    new Hand(cards, jokers)
 }

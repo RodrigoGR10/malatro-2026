@@ -76,24 +76,24 @@ class PokerCombinationTest extends FunSuite {
   }
 
   test("La prioridad elige StraightFlush sobre Flush y Straight") {
-    val hand = List(tenHeart, jackHeart, queenHeart, kingHeart, aceHeart)
+    val hand = Hand(List(tenHeart, jackHeart, queenHeart, kingHeart, aceHeart))
     assertEquals(PokerHand.bestCombination(hand), StraightFlush)
   }
 
   test("La prioridad elige ThreeOfAKind sobre Pair") {
-    val hand = List(twoHeart, twoDiamond, twoClub, fiveHeart, sixHeart)
+    val hand = Hand(List(twoHeart, twoDiamond, twoClub, fiveHeart, sixHeart))
     assertEquals(PokerHand.bestCombination(hand), ThreeOfAKind)
   }
 
   test("El As puede actuar como 1 en la escalera A-2-3-4-5") {
-    val hand = List(aceSpade, twoDiamond, threeClub, fourSpade, fiveDiamond)
-    assert(Straight.matches(hand))
-    assertEquals(PokerHand.bestCombination(hand), Straight)
+    val cards = List(aceSpade, twoDiamond, threeClub, fourSpade, fiveDiamond)
+    assert(Straight.matches(cards))
+    assertEquals(PokerHand.bestCombination(Hand(cards)), Straight)
   }
 
   test("El As puede actuar como 14 en la escalera 10-J-Q-K-A") {
-    val hand = List(tenHeart, jackClub, queenDiamond, kingHeart, aceHeart)
-    assert(Straight.matches(hand))
-    assertEquals(PokerHand.bestCombination(hand), Straight)
+    val cards = List(tenHeart, jackClub, queenDiamond, kingHeart, aceHeart)
+    assert(Straight.matches(cards))
+    assertEquals(PokerHand.bestCombination(Hand(cards)), Straight)
   }
 }

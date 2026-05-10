@@ -1,21 +1,26 @@
 package cl.uchile.dcc
-import rango.Ace
 import rango.Rank
+import scala.collection.mutable
 
 // Métodos auxiliares para validar combinaciones de póker
 object PokerHelpers {
 
-  // Verifica que la mano tenga entre 1 y 5 cartas
   def validHand(cards: List[Card]): Boolean =
     cards.nonEmpty && cards.size <= 5
 
-  // Cuenta cuántas cartas hay de cada rango
-  def rankCounts(cards: List[Card]): Map[Rank, Int] =
-    cards.groupBy(_.rank).map { case (rank, sameRankCards) =>
-      rank -> sameRankCards.size
-    }
+  def rankCounts(cards: List[Card]): mutable.Map[Rank, Int] = {
+    val counts: mutable.Map[Rank, Int] = mutable.Map.empty
+    for card <- cards do
+      val current = counts.getOrElse(card.rank, 0)
+      counts.update(card.rank, current + 1)
+    counts
+  }
 
-  // Verifica que una lista de números ordenados sea consecutiva
-  def isConsecutive(values: List[Int]): Boolean =
-    values.zip(values.drop(1)).forall { case (a, b) => b == a + 1 }
+  def isConsecutive(values: List[Int]): Boolean = {
+    var consecutive = true
+    for i <- 0 until values.size - 1 do
+      if values(i + 1) != values(i) + 1 then
+        consecutive = false
+    consecutive
+  }
 }

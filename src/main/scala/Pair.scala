@@ -5,7 +5,14 @@ object Pair extends PokerCombination {
   val name: String = "Pair"
   val baseScore: Score = Score(10, 2)
 
-  // Válida si existe algún rango con 2 o más cartas
-  def matches(cards: List[Card]): Boolean =
-    PokerHelpers.validHand(cards) && PokerHelpers.rankCounts(cards).values.exists(_ >= 2)
+  def matches(cards: List[Card]): Boolean = {
+    if !PokerHelpers.validHand(cards) then false
+    else {
+      val counts = PokerHelpers.rankCounts(cards)
+      var found = false
+      for (_, count) <- counts do
+        if count >= 2 then found = true
+      found
+    }
+  }
 }

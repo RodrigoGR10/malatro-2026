@@ -1,6 +1,5 @@
 package cl.uchile.dcc
 package rango
 
-case object Impar extends ClasificacionRango {
-
-}
+/** Classification for odd ranks: Ace, 3, 5, 7 and 9. */
+object Impar extends ClasificacionRango

@@ -1,7 +1,8 @@
 package cl.uchile.dcc
 package rango
 
-case object Queen extends Rank {
+/** Rank Queen: order 12, chip value 10, classification Figura. */
+object Queen extends Rank {
   val orden: Int = 12
   val valor: Int = 10
   val clasificacion: ClasificacionRango = Figura

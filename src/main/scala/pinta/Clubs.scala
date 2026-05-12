@@ -1,6 +1,5 @@
 package cl.uchile.dcc
 package pinta
 
-case object Clubs extends Pinta {
-
-}
+/** The Clubs suit. */
+object Clubs extends Pinta

@@ -1,6 +1,5 @@
 package cl.uchile.dcc
 package pinta
 
-case object Spades extends Pinta {
-
-}
+/** The Spades suit. */
+object Spades extends Pinta

@@ -4,7 +4,7 @@ package cl.uchile.dcc
 object PokerHand {
   val orderedCombinations: List[PokerCombination] =
     List(StraightFlush, Flush, Straight, ThreeOfAKind, Pair, HighCard)
-  
+
   def bestCombination(hand: Hand): PokerCombination = {
     var result: PokerCombination = HighCard
     var found = false

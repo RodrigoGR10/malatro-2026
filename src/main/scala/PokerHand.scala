@@ -7,7 +7,7 @@ package cl.uchile.dcc
  * The first combination that matches is returned.
  */
 object PokerHand {
-  /** The list of all combinations ordered from highest to lowest priority. */
+  /** Combinations ordered from highest to lowest priority. */
   val orderedCombinations: List[PokerCombination] =
     List(StraightFlush, Flush, Straight, ThreeOfAKind, Pair, HighCard)
   /**

@@ -5,15 +5,15 @@ import rango.Rank
 /**
  * Represents a playing card with a rank and a suit.
  *
- * @param rank the rank of this card (e.g. Ace, Two, King)
- * @param suit the suit of this card (e.g. Hearts, Diamonds)
+ * @param rank the rank of the card
+ * @param suit the suit of the card
  */
 class Card(val rank: Rank, val suit: Pinta) {
   /**
-   * Returns true if the given object is a Card with the same rank and suit.
+   * Returns true if this card has the same rank and suit as another object.
    *
    * @param obj the object to compare with
-   * @return true if obj is a Card with equal rank and suit
+   * @return true if obj is a Card with the same rank and suit
    */
   override def equals(obj: Any): Boolean = {
     if !obj.isInstanceOf[Card] then false

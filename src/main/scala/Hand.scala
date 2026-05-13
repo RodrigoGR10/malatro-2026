@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 
 /**
- * Represents the player's hand in a game of Malatro.
+ * Represents the player's hand
  *
  * @param _cards  the initial list of cards in the hand
  * @param _jokers the initial list of active Jokers

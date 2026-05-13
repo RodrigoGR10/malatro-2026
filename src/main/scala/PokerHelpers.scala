@@ -93,8 +93,6 @@ object PokerHelpers {
   /**
    * Returns true if at least one rank appears three times.
    *
-   * Note: also returns true for a full house, since it contains
-   * a rank that appears exactly three times.
    * Priority between combinations is handled by PokerHand.bestCombination.
    *
    * @param cards the list of cards to check

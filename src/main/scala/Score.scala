@@ -5,7 +5,7 @@ package cl.uchile.dcc
  * The final score of a hand is computed as chips * mult.
  *
  * @param chips the base chip count of the hand
- * @param mult  the multiplier applied to the chip count
+ * @param mult the multiplier applied to the chip count
  */
 class Score(val chips: Int, val mult: Int) {
   /**

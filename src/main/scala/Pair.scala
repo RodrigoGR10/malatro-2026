@@ -7,7 +7,7 @@ package cl.uchile.dcc
  */
 object Pair extends PokerCombination {
   val name: String = "Pair"
-  val baseScore: Score = Score(10, 2)
+  val baseScore: Score = new Score(10, 2)
   /** Returns true if at least one rank appears exactly two times. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isPair(cards)

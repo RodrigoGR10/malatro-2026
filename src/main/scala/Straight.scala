@@ -8,7 +8,7 @@ package cl.uchile.dcc
  */
 object Straight extends PokerCombination {
   val name: String = "Straight"
-  val baseScore: Score = Score(30, 4)
+  val baseScore: Score = new Score(30, 4)
   /** Returns true if the 5 cards are consecutive. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isStraight(cards)

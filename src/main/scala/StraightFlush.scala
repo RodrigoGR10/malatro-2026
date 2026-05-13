@@ -8,7 +8,7 @@ package cl.uchile.dcc
  */
 object StraightFlush extends PokerCombination {
   val name: String = "Straight Flush"
-  val baseScore: Score = Score(100, 8)
+  val baseScore: Score = new Score(100, 8)
   /** Returns true if the cards form both a Straight and a Flush. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isStraightFlush(cards)

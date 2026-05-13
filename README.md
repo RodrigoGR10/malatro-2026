@@ -1,85 +1,38 @@
-# Tarea 0 | Entrega Final
+# Malatro
+CC3002 - Metodologías de Diseño y Programación
+Rodrigo Guerrero Rojas
 
-La idea de esta primera entrega es que se familiaricen con el lenguaje Scala, así como el manejo de Git, resolviendo un problema de programación sencillo.
+El proyecto Malatro es un juego de cartas donde el jugador forma manos de póker usando una baraja estándar y diferentes tipos de Jokers para obtener el mayor puntaje posible antes de quedarse sin jugadas.
 
-## Problema: Encontrar el Máximo Común Divisor (mcd) entre dos números dados.
-
-El **Máximo Común Divisor (MCD)** de dos números enteros es el mayor número entero positivo que divide a ambos sin dejar residuo. Por ejemplo, el MCD de 12 y 8 es 4, ya que 4 es el mayor número que divide tanto a 12 como a 8.
-
-Para calcularlo, utilizaremos el **algoritmo de Euclides**, que se basa en la siguiente observación:
-
-> mcd(a, b) = mcd(b, a mod b)
-
-Es decir, el MCD de dos números es igual al MCD del segundo número y el resto de dividir el primero por el segundo. Cuando el resto es 0, el MCD es el último divisor no nulo.
-
-**Ejemplo paso a paso:** mcd(12, 8)
-- mcd(12, 8) → mcd(8, 12 mod 8) = mcd(8, 4)
-- mcd(8, 4) → mcd(4, 8 mod 4) = mcd(4, 0)
-- Como el segundo valor es 0, el MCD es **4**.
-
-### Comportamiento esperado
-
-El programa debe ser **interactivo**: pedirle al usuario dos números, calcular el MCD entre ellos utilizando el algoritmo de Euclides, mostrar el resultado, y repetir el proceso. El programa termina cuando el usuario ingresa **0** como primer número.
-
-### Ejemplo de ejecución
-
+## Organización del código
 ```
-Ingrese el primer número (0 para salir): 12
-Ingrese el segundo número: 8
-El MCD de 12 y 8 es 4
-
-Ingrese el primer número (0 para salir): 15
-Ingrese el segundo número: 5
-El MCD de 15 y 5 es 5
-
-Ingrese el primer número (0 para salir): 0
-Adiós!
+src/main/scala/
+├── rango/                  # Rangos de cartas y su clasificación
+├── pinta/                  # Pintas de cartas
+├── Card.scala              # Carta individual
+├── Score.scala             # Puntaje de una jugada
+├── Hand.scala              # Mano del jugador
+├── Joker.scala             # Jokers disponibles
+├── PokerCombination.scala  # Interfaz base de combinaciones
+├── PokerHelpers.scala      # Lógica compartida de validación
+├── PokerHand.scala         # Determina la mejor combinación
+└── StraightFlush/Flush/Straight/ThreeOfAKind/Pair/HighCard.scala
+src/test/scala/
+├── MalatroTest.scala            # Tests de entidades base: Score, Card, rangos, pintas y Jokers
+├── PokerCombinationTest.scala   # Tests de combinaciones, prioridad y casos con As
+└── HandTest.scala               # Tests de operaciones de la mano del jugador
 ```
 
-## Git
+## Decisiones de diseño
+Rangos y pintas son `object`, pues un rango siempre tiene el mismo orden, valor y clasificación sin importar cuándo o dónde se use. Como sus propiedades nunca cambian y siempre representan lo mismo, tiene sentido modelarlos como objetos fijos en lugar de crear instancias nuevas cada vez.
 
-Para trabajar en esta tarea, deben crear una rama llamada `entrega-final-0` a partir de `main`
+`PokerHelpers` concentra toda la lógica de validación de combinaciones en un solo lugar, evitando duplicación entre los distintos objetos de combinación.
 
-Una vez que hayan terminado de implementar su solución, hagan commit y push de sus cambios en esa rama
+Se utiliza el trait `PokerCombination` para que cada combinación implemente su propia validación de forma independiente. Esto permite agregar nuevas combinaciones sin modificar el código existente.
 
-## Instrucciones de implementación
+`Joker` como trait con cada Joker como un `object` que extiende el trait, garantizando una única instancia por tipo. Esto permite identificarlos y compararlos directamente, y en el futuro cada uno podrá implementar su propio efecto sin afectar a los demás.
 
-El archivo que deben editar es:
+`equals` en `Card` y `Score`fueron implementados para permitir comparar instancias distintas que representen la misma carta o el mismo puntaje.
 
-```
-src/main/scala/mcd/euclides.scala
-```
-
-Deben escribir su código **entre los comentarios de inicio y fin** que encontrarán en el archivo:
-
-```scala
-// Inicio de la zona donde deben editar el código
-
-// (su código va aquí)
-
-// Fin de la zona donde deben editar el código
-```
-
-Para ejecutar el programa y probar su solución, utilicen:
-
-```bash
-sbt run
-```
-
-## Entrega
-
-Para subir su entrega, deberán crear un **Pull Request** en GitHub desde la rama `entrega-final-0` hacia `main`, con el título **"Tarea 0 - Entrega Final"**.
-
-**IMPORTANTE: No hacer merge** del Pull Request. El cuerpo docente **solo revisará** la pull request realizada.
-
-Entregar por **U-Cursos** un archivo llamado `entrega-final-0.txt` que contenga:
-- Su nombre completo
-- El link al Pull Request
-   
-Este es el formato que deben seguir:
-```txt
-Nombre: Perico Los Palotes (lo cambian por su nombre)
-Pull Request: https://github.com/... (completan los "..." con el resto del link)
-```
-
-Esta tarea es **obligatoria** y corresponde al **5% de la nota de Tareas**.
+## Testing
+Se buscó cubrir creación e igualdad de objetos, validación de cada combinación de póker con casos positivos y negativos, prioridad entre combinaciones cuando una mano satisface más de una, el comportamiento dual del As en escaleras como 1 y como 14, y todas las operaciones de la mano del jugador como agregar, quitar y jugar cartas y Jokers.

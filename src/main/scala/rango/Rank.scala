@@ -11,4 +11,6 @@ trait Rank {
   val valor: Int
   /** Classification of the rank. */
   val clasificacion: ClasificacionRango
+
+  def applyScore(score: Score, j: Joker): Score
 }

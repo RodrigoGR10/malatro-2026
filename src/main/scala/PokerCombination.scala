@@ -18,4 +18,6 @@ trait PokerCombination {
    * @return true if the cards form this combination
    */
   def matches(cards: List[Card]): Boolean
+
+  def applyScore(score: Score, j: Joker): Score
 }

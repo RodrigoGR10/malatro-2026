@@ -101,4 +101,27 @@ class Hand(private var _cards: List[Card] = List.empty, private var _jokers: Lis
     _cards = remaining
     played
   }
+
+  def discardHand(indices: List[Int]): List[Card] = {
+    if _discardCount >= 3 then
+      throw new TooManyDiscardsException("Cannot discard more than 3 times.")
+    if indices.size < 1 then
+      throw new TooFewCardsToPlayException("Must discard at least 1 card.")
+    if indices.size > 5 then
+      throw new TooManyCardsToPlayException("Cannot discard more than 5 cards.")
+    validateIndices(indices)
+    _discardCount += 1
+    var discarded: List[Card] = List.empty
+    var remaining: List[Card] = List.empty
+    for i <- 0 until _cards.size do
+      var isDiscarded = false
+      for j <- indices do
+        if j == i then isDiscarded = true
+      if isDiscarded then
+        discarded = discarded :+ _cards(i)
+      else
+        remaining = remaining :+ _cards(i)
+    _cards = remaining
+    discarded
+  }
 }

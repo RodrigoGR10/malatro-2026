@@ -11,4 +11,10 @@ object Flush extends PokerCombination {
   /** Returns true if all 5 cards share the same suit. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isFlush(cards)
+
+  def applyScore(score: Score, j: Joker): Score = {
+    score.chips = score.chips + baseScore.chips
+    score.mult = score.mult + baseScore.mult
+    score
+  }
 }

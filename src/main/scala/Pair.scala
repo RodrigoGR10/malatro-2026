@@ -11,4 +11,10 @@ object Pair extends PokerCombination {
   /** Returns true if at least one rank appears exactly two times. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isPair(cards)
+
+  def applyScore(score: Score, j: Joker): Score = {
+    score.chips = score.chips + baseScore.chips
+    score.mult = score.mult + baseScore.mult
+    score
+  }
 }

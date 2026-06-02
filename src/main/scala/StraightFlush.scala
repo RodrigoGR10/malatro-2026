@@ -12,4 +12,10 @@ object StraightFlush extends PokerCombination {
   /** Returns true if the cards form both a Straight and a Flush. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isStraightFlush(cards)
+
+  def applyScore(score: Score, j: Joker): Score = {
+    score.chips = score.chips + baseScore.chips
+    score.mult = score.mult + baseScore.mult
+    score
+  }
 }

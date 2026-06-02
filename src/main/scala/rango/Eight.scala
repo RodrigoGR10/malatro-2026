@@ -6,4 +6,9 @@ object Eight extends Rank {
   val orden: Int = 8
   val valor: Int = 8
   val clasificacion: ClasificacionRango = Par
+
+  def applyScore(score: Score, j: Joker): Score = {
+    score.chips = score.chips + valor
+    score
+  }
 }

@@ -1,4 +1,5 @@
 package cl.uchile.dcc
+import exceptions._
 
 /**
  * Represents the player's hand

@@ -27,7 +27,7 @@ object PokerHelpers {
    * @param cards the list of cards to count
    * @return a mutable map from rank to occurrence count
    */
-  def rankCounts(cards: List[Card]): mutable.Map[Rank, Int] = {
+  private def rankCounts(cards: List[Card]): mutable.Map[Rank, Int] = {
     val counts: mutable.Map[Rank, Int] = mutable.Map.empty
     for card <- cards do
       if counts.contains(card.rank) then
@@ -46,7 +46,7 @@ object PokerHelpers {
    * @param values a sorted list of integers to check
    * @return true if each element is exactly one greater than the previous
    */
-  def isConsecutive(values: List[Int]): Boolean = {
+  private def isConsecutive(values: List[Int]): Boolean = {
     var consecutive = true
     for i <- 0 until values.size - 1 do
       if values(i + 1) != values(i) + 1 then
@@ -62,7 +62,7 @@ object PokerHelpers {
    * @param cards the list of cards to check
    * @return true if all cards have the same suit
    */
-  def sameSuit(cards: List[Card]): Boolean = {
+  private def sameSuit(cards: List[Card]): Boolean = {
     if cards.isEmpty then false
     else {
       val firstSuit = cards(0).suit

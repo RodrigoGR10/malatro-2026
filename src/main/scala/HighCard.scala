@@ -1,4 +1,5 @@
 package cl.uchile.dcc
+import joker._
 
 /**
  * Poker combination: any valid hand that does not satisfy a higher combination.

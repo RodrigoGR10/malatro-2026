@@ -1,4 +1,5 @@
 package cl.uchile.dcc
+import joker._
 
 /**
  * Poker combination: two cards of the same rank.

@@ -1,5 +1,6 @@
 package cl.uchile.dcc
 package pinta
+import joker._
 
 /** The Clubs suit. */
 object Clubs extends Pinta {

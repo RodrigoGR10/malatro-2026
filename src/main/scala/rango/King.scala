@@ -1,5 +1,6 @@
 package cl.uchile.dcc
 package rango
+import joker._
 
 /** Rank King: order 13, chip value 10, classification Figura. */
 object King extends Rank {

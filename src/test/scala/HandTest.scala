@@ -2,6 +2,7 @@ package cl.uchile.dcc
 import munit.FunSuite
 import rango.{Two, Three, Four, Five, Six, Ace, King}
 import pinta.{Hearts, Diamonds, Spades, Clubs}
+import joker._
 
 class HandTest extends FunSuite {
   var hand: Hand = _

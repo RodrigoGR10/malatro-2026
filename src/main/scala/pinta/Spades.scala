@@ -1,5 +1,6 @@
 package cl.uchile.dcc
 package pinta
+import joker._
 
 /** The Spades suit. */
 object Spades extends Pinta {

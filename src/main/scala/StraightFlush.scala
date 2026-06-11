@@ -1,4 +1,5 @@
 package cl.uchile.dcc
+import joker._
 
 /**
  * Poker combination: five consecutive cards of the same suit.

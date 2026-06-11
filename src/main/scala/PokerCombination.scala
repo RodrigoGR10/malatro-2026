@@ -1,4 +1,5 @@
 package cl.uchile.dcc
+import joker._
 
 /**
  * Represents a poker hand combination such as Flush, Straight, or Pair.

@@ -1,5 +1,6 @@
 package cl.uchile.dcc
 package rango
+import joker._
 
 /**
  * Rank Ace: order 14, chip value 11, classification Impar.

@@ -3,6 +3,7 @@ import munit.FunSuite
 import rango.{Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King}
 import rango.{Impar, Figura, Par}
 import pinta.{Hearts, Diamonds, Spades, Clubs}
+import joker._
 
 class MalatroTest extends FunSuite {
   var score: Score = _

@@ -1,5 +1,6 @@
 package cl.uchile.dcc
 import exceptions._
+import joker._
 
 /**
  * Represents the player's hand

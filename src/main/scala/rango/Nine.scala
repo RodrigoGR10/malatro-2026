@@ -1,5 +1,6 @@
 package cl.uchile.dcc
 package rango
+import joker._
 
 /** Rank Nine: order 9, chip value 9, classification Impar. */
 object Nine extends Rank {

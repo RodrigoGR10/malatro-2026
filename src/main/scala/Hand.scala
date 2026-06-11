@@ -14,12 +14,11 @@ class Hand(private var _cards: List[Card] = List.empty, private var _jokers: Lis
   /** Returns the current list of cards in the hand. */
   def cards: List[Card] =
     _cards
-  def cards_=(value: List[Card]): Unit = _cards = value
 
   /** Returns the current list of active Jokers. */
   def jokers: List[Joker] =
     _jokers
-  def jokers_=(value: List[Joker]): Unit = _jokers = value
+
   /**
    * Adds a card to the end of the hand.
    *

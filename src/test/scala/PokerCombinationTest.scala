@@ -1,7 +1,9 @@
 package cl.uchile.dcc
+import combinations.*
+import pinta.{Clubs, Diamonds, Hearts, Spades}
+import rango.*
+
 import munit.FunSuite
-import rango.{Ace, Two, Three, Four, Five, Six, Nine, Ten, Jack, Queen, King}
-import pinta.{Hearts, Diamonds, Spades, Clubs}
 
 class PokerCombinationTest extends FunSuite {
 

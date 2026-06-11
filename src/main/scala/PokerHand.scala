@@ -1,5 +1,7 @@
 package cl.uchile.dcc
 
+import combinations.{Flush, HighCard, Pair, PokerCombination, Straight, StraightFlush, ThreeOfAKind}
+
 /**
  * Evaluates the best poker combination for a given hand.
  *

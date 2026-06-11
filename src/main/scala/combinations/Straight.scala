@@ -1,4 +1,6 @@
 package cl.uchile.dcc
+package combinations
+
 import joker._
 
 /**

@@ -1,6 +1,6 @@
 package cl.uchile.dcc
 package rango
-import joker._
+import joker.Joker
 
 /** Rank Seven: order 7, chip value 7, classification Impar. */
 object Seven extends Rank {
@@ -10,6 +10,6 @@ object Seven extends Rank {
 
   def applyScore(score: Score, j: Joker): Score = {
     score.chips = score.chips + valor
-    score
+    j.affectRank(this, score)
   }
 }

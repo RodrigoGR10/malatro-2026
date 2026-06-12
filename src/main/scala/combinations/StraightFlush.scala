@@ -1,8 +1,6 @@
 package cl.uchile.dcc
 package combinations
 
-import joker._
-
 /**
  * Poker combination: five consecutive cards of the same suit.
  *
@@ -16,9 +14,4 @@ object StraightFlush extends PokerCombination {
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isStraightFlush(cards)
 
-  def applyScore(score: Score, j: Joker): Score = {
-    score.chips = score.chips + baseScore.chips
-    score.mult = score.mult + baseScore.mult
-    score
-  }
 }

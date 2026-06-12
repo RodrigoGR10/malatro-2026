@@ -1,7 +1,6 @@
 package cl.uchile.dcc
 package combinations
-
-import joker._
+import joker.Joker
 
 /**
  * Represents a poker hand combination such as Flush, Straight, or Pair.
@@ -22,5 +21,17 @@ trait PokerCombination {
    */
   def matches(cards: List[Card]): Boolean
 
-  def applyScore(score: Score, j: Joker): Score
+  /**
+   * Adds this combination's base score, then delegates to the joker
+   * so it can apply its own effect for this combination.
+   *
+   * @param score the current score to update
+   * @param j the joker whose effect may apply
+   * @return the updated score
+   */
+  def applyScore(score: Score, j: Joker): Score = {
+    score.chips = score.chips + baseScore.chips
+    score.mult = score.mult + baseScore.mult
+    j.affectCombination(this, score)
+  }
 }

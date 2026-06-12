@@ -1,8 +1,6 @@
 package cl.uchile.dcc
 package combinations
 
-import joker._
-
 /**
  * Poker combination: five consecutive cards regardless of suit.
  *
@@ -15,10 +13,4 @@ object Straight extends PokerCombination {
   /** Returns true if the 5 cards are consecutive. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isStraight(cards)
-
-  def applyScore(score: Score, j: Joker): Score = {
-    score.chips = score.chips + baseScore.chips
-    score.mult = score.mult + baseScore.mult
-    score
-  }
 }

@@ -1,8 +1,6 @@
 package cl.uchile.dcc
 package combinations
 
-import joker._
-
 /**
  * Poker combination: three cards of the same rank.
  *
@@ -14,10 +12,4 @@ object ThreeOfAKind extends PokerCombination {
   /** Returns true if at least one rank appears exactly three times. */
   def matches(cards: List[Card]): Boolean =
     PokerHelpers.validHand(cards) && PokerHelpers.isThreeOfAKind(cards)
-
-  def applyScore(score: Score, j: Joker): Score = {
-    score.chips = score.chips + baseScore.chips
-    score.mult = score.mult + baseScore.mult
-    score
-  }
 }

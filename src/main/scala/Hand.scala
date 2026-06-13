@@ -104,6 +104,12 @@ class Hand(private var _cards: List[Card] = List.empty, private var _jokers: Lis
     played
   }
 
+  /**
+   * Discards the cards at the given indices.
+   *
+   * @param indices a list of zero-based card indices to discard
+   * @return the list of discarded cards, in order
+   */
   def discardHand(indices: List[Int]): List[Card] = {
     if _discardCount >= 3 then
       throw new TooManyDiscardsException("Cannot discard more than 3 times.")

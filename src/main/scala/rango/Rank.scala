@@ -21,5 +21,8 @@ trait Rank {
    * @param j the joker whose effect may apply
    * @return the updated score
    */
-  def applyScore(score: Score, j: Joker): Score
+  def applyScore(score: Score, j: Joker): Score = {
+    score.chips = score.chips + valor
+    j.affectRank(this, score)
+  }
 }

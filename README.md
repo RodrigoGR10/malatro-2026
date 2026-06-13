@@ -32,7 +32,7 @@ Rangos y pintas son `object`, pues un rango o una pinta siempre representan lo m
 El cálculo de puntaje con Jokers se implementó usando double dispatch.
 El trait `Joker` define tres métodos especializados: `affectRank`, `affectSuit` y `affectCombination`, uno por cada jerarquía que un Joker puede afectar (Rango, Pinta y Combinación de póker). Cada uno tiene una implementación por defecto que retorna el puntaje sin cambios.
 `Rank.applyScore`, `Pinta.applyScore` y `PokerCombination.applyScore` realizan el primer dispatch: suman su puntaje base (chips/multiplicador) y delegan en el Joker recibido, llamando a `j.affectRank(this, score)` (o el método correspondiente según la jerarquía). El segundo dispatch ocurre al resolver cuál Joker concreto ejecuta ese método.
-Para evitar duplicación, las implementaciones de `applyScore` en `Pinta` y `PokerCombination` se definen directamente en el trait, y cada objeto concreto (`Hearts`, `Diamonds`, `Straight`, `Flush`, etc.) las hereda.
+Para evitar duplicación, las implementaciones de `applyScore` en `Rank`, `Pinta` y `PokerCombination` se definen directamente en el trait, y cada objeto concreto (`Ace`, `Two`, `Hearts`, `Diamonds`, `Straight`, `Flush`, etc.) las hereda.
 Cada Joker concreto sobrescribe únicamente el método relevante a su efecto:
 - `GreedyJoker` sobrescribe `affectSuit`: suma +3 al multiplicador si la pinta recibida es Diamantes.
 - `EvenSteven` sobrescribe `affectRank`: suma +4 al multiplicador si la clasificación del rango recibido es Par.

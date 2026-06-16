@@ -49,3 +49,14 @@ Las excepciones están organizadas en el paquete `exceptions` y los jokers en el
 ## Testing
 Se cubre creación e igualdad de objetos, validación de cada combinación de póker con casos positivos y negativos, prioridad entre combinaciones cuando una mano satisface más de una, el comportamiento dual del As en escaleras (orden 1 y 14), todas las operaciones de la mano del jugador junto con sus excepciones (incluyendo `discardHand`), y el cálculo de puntaje de rangos, pintas, combinaciones y cartas con los efectos de cada Joker mediante double dispatch.
 El proyecto alcanza un 97% de cobertura de líneas en `src/main/scala`.
+
+## Diagrama de estados
+
+![diagrama-estados.png](src/main/scala/docs/diagrama-estados.png)
+
+### Explicación
+
+El diagrama comienza en `Start`, que representa el inicio de la partida. Desde allí se pasa a `StartRound`, donde se prepara la ronda y se deja el juego listo para actuar. Luego se entra a `PlayerTurn`, que es el estado principal en el que el jugador decide qué hacer.
+Desde `PlayerTurn` pueden ocurrir dos transiciones principales: `playHand` y `discardHand`. Ambas representan acciones del jugador sobre su mano, y deben respetar las restricciones del proyecto: entre 1 y 5 cartas por acción, con un máximo de 3 jugadas y 3 descartes por ronda. Mientras todavía existan jugadas disponibles, el flujo vuelve a `PlayerTurn` para permitir una nueva decisión.
+Cuando ya no quedan jugadas disponibles, la partida pasa a `RoundEnd`. En ese estado se evalúa si el puntaje alcanzado es suficiente para ganar. Si el puntaje mínimo se alcanzó antes de quedarse sin jugadas, la transición va a `Win`. Si no se alcanzó, la transición va a `Lose`.
+Tanto `Win` como `Lose` conducen a `Finish`, que representa el término definitivo de la partida.

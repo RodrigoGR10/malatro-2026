@@ -2,14 +2,18 @@ package cl.uchile.dcc
 import exceptions._
 import joker._
 import combinations._
+import observer.BaseSubject
 
 /**
- * Represents the player's hand
+ * Represents the player's hand.
+ *
+ * Notifies its observers when the player runs out of plays.
  *
  * @param _cards  the initial list of cards in the hand
  * @param _jokers the initial list of active Jokers
  */
-class Hand(private var _cards: List[Card] = List.empty, private var _jokers: List[Joker] = List.empty) {
+class Hand(private var _cards: List[Card] = List.empty, private var _jokers: List[Joker] = List.empty)
+  extends BaseSubject[Hand] {
 
   private var _playCount: Int = 0
   private var _discardCount: Int = 0
@@ -78,6 +82,8 @@ class Hand(private var _cards: List[Card] = List.empty, private var _jokers: Lis
   /**
    * Plays the cards at the given indices.
    *
+   * Notifies observers if this was the last available play.
+   *
    * @param indices a list of zero-based card indices to play
    * @return the list of cards at the given indices, in order
    */
@@ -101,6 +107,8 @@ class Hand(private var _cards: List[Card] = List.empty, private var _jokers: Lis
       if !isPlayed then
         remaining = remaining :+ _cards(i)
     _cards = remaining
+    if _playCount >= 3 then
+      notifyObservers(this)
     played
   }
 

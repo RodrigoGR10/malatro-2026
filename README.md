@@ -42,6 +42,10 @@ Cada Joker concreto sobrescribe únicamente el método relevante a su efecto:
 De esta forma, es el propio Joker quien decide su efecto según el objeto (rango, pinta o combinación) que recibe como parámetro. Esto permite agregar nuevos Jokers en el futuro sin modificar el código existente de rangos, pintas o combinaciones.
 `Card.applyScore` recibe una lista de jokers e itera sobre ella: por cada joker activo, aplica primero la interacción del rango (`rank.applyScore`) y luego la de la pinta (`suit.applyScore`) con ese joker.
 
+### Controlador del juego (State y Observer)
+El controlador se implementó usando el patrón **State** para modelar las fases de la partida: `PreGame`, `PlayerTurn` y `RoundEnd`. La clase base `GameState` define cada acción posible (`startGame`, `playHand`, `discardHand`) con una implementación por defecto que lanza una excepción, y cada estado concreto sobrescribe únicamente las transiciones que le son válidas. Esto evita condicionales para decidir qué acción es válida en cada momento, ya que cada estado conoce sus propias transiciones.
+Para notificar el fin de la partida se implementó el patrón **Observer**: `Hand` actúa como `Subject` y `GameController` se suscribe como `Observer`. Cuando el jugador agota sus jugadas disponibles, `Hand` notifica automáticamente a sus observadores sin conocer los detalles del controlador, lo que desacopla el modelo del control del flujo del juego.
+
 ### Otras decisiones
 Las excepciones están organizadas en el paquete `exceptions` y los jokers en el paquete `joker`, siguiendo el principio de una clase/trait por archivo.
 `equals` en `Card` y `Score` permite comparar instancias distintas que representen la misma carta o el mismo puntaje, lo cual es necesario para los tests.

@@ -160,12 +160,12 @@ class ScoreTest extends FunSuite {
     assertEquals(score.mult, 5)
   }
 
-  test("Card.applyScore with empty joker list returns score unchanged") {
+  test("Card.applyScore with empty joker list adds card chips") {
     val card = new Card(Two, Hearts)
     val score = new Score(0, 1)
-    val result = card.applyScore(score, List.empty)
-    assertEquals(result.chips, 0)
-    assertEquals(result.mult, 1)
+    card.applyScore(score, List.empty)
+    assertEquals(score.chips, 2)
+    assertEquals(score.mult, 1)
   }
 
   test("Card.applyScore with GreedyJoker on a Diamond card adds chips and mult") {
@@ -192,11 +192,11 @@ class ScoreTest extends FunSuite {
     assertEquals(score.mult, 1)
   }
 
-  test("Card.applyScore with multiple jokers applies rank chips once per joker") {
+  test("Card.applyScore with multiple jokers adds rank chips once") {
     val card = new Card(Two, Diamonds)
     val score = new Score(0, 1)
     card.applyScore(score, List(GreedyJoker, EvenSteven))
-    assertEquals(score.chips, 4)
+    assertEquals(score.chips, 2)
     assertEquals(score.mult, 8)
   }
 

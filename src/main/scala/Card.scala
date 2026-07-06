@@ -31,11 +31,11 @@ class Card(private var _rank: Rank, private var _suit: Pinta) {
    * @return the updated score
    */
   def applyScore(score: Score, jokers: List[Joker]): Score = {
-    var current = score
+    score.chips = score.chips + rank.valor
     for joker <- jokers do
-      current = rank.applyScore(current, joker)
-      current = suit.applyScore(current, joker)
-    current
+      joker.affectRank(rank, score)
+      suit.applyScore(score, joker)
+    score
   }
 
   override def equals(obj: Any): Boolean = {

@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package pinta
+package suit
 
 /** The Diamonds suit. */
-object Diamonds extends Pinta
+object Diamonds extends Suit

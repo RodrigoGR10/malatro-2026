@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 import munit.FunSuite
-import rango._
-import pinta._
+import rank._
+import suit._
 import joker._
 import combinations._
 

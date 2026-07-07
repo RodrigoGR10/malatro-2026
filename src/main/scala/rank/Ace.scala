@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package rango
+package rank
 import joker.Joker
 
 /**
@@ -8,7 +8,7 @@ import joker.Joker
  * The Ace can act as order 1 or 14 when detecting straights.
  */
 object Ace extends Rank {
-  val orden: Int = 14
-  val valor: Int = 11
-  val clasificacion: ClasificacionRango = Impar
+  val order: Int = 14
+  val chipValue: Int = 11
+  val classification: RankClassification = Odd
 }

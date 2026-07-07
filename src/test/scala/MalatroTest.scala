@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 import joker.*
-import pinta.{Clubs, Diamonds, Hearts, Spades}
-import rango.*
+import suit.{Clubs, Diamonds, Hearts, Spades}
+import rank.*
 
 import munit.FunSuite
 
@@ -25,11 +25,11 @@ class MalatroTest extends FunSuite {
     assertEquals(score.mult, 5)
   }
 
-  test("Dos Scores con los mismos valores son iguales") {
+  test("Dos Scores con los mismos chipValuees son iguales") {
     assertEquals(new Score(30, 4), new Score(30, 4))
   }
 
-  test("Dos Scores con distintos valores no son iguales") {
+  test("Dos Scores con distintos chipValuees no son iguales") {
     assertNotEquals(new Score(10, 2), new Score(30, 4))
   }
 
@@ -62,82 +62,82 @@ class MalatroTest extends FunSuite {
     assert(!new Card(Ace, Hearts).equals(42))
   }
 
-  test("Ace tiene orden 14, valor 11, clasificacion Impar") {
-    assertEquals(Ace.orden, 14)
-    assertEquals(Ace.valor, 11)
-    assertEquals(Ace.clasificacion, Impar)
+  test("Ace tiene order 14, chipValue 11, classification Impar") {
+    assertEquals(Ace.order, 14)
+    assertEquals(Ace.chipValue, 11)
+    assertEquals(Ace.classification, Odd)
   }
 
-  test("Two tiene orden 2, valor 2, clasificacion Par") {
-    assertEquals(Two.orden, 2)
-    assertEquals(Two.valor, 2)
-    assertEquals(Two.clasificacion, Par)
+  test("Two tiene order 2, chipValue 2, classification Par") {
+    assertEquals(Two.order, 2)
+    assertEquals(Two.chipValue, 2)
+    assertEquals(Two.classification, Even)
   }
 
-  test("Three tiene orden 3, valor 3, clasificacion Impar") {
-    assertEquals(Three.orden, 3)
-    assertEquals(Three.valor, 3)
-    assertEquals(Three.clasificacion, Impar)
+  test("Three tiene order 3, chipValue 3, classification Impar") {
+    assertEquals(Three.order, 3)
+    assertEquals(Three.chipValue, 3)
+    assertEquals(Three.classification, Odd)
   }
 
-  test("Four tiene orden 4, valor 4, clasificacion Par") {
-    assertEquals(Four.orden, 4)
-    assertEquals(Four.valor, 4)
-    assertEquals(Four.clasificacion, Par)
+  test("Four tiene order 4, chipValue 4, classification Par") {
+    assertEquals(Four.order, 4)
+    assertEquals(Four.chipValue, 4)
+    assertEquals(Four.classification, Even)
   }
 
-  test("Five tiene orden 5, valor 5, clasificacion Impar") {
-    assertEquals(Five.orden, 5)
-    assertEquals(Five.valor, 5)
-    assertEquals(Five.clasificacion, Impar)
+  test("Five tiene order 5, chipValue 5, classification Impar") {
+    assertEquals(Five.order, 5)
+    assertEquals(Five.chipValue, 5)
+    assertEquals(Five.classification, Odd)
   }
 
-  test("Six tiene orden 6, valor 6, clasificacion Par") {
-    assertEquals(Six.orden, 6)
-    assertEquals(Six.valor, 6)
-    assertEquals(Six.clasificacion, Par)
+  test("Six tiene order 6, chipValue 6, classification Par") {
+    assertEquals(Six.order, 6)
+    assertEquals(Six.chipValue, 6)
+    assertEquals(Six.classification, Even)
   }
 
-  test("Seven tiene orden 7, valor 7, clasificacion Impar") {
-    assertEquals(Seven.orden, 7)
-    assertEquals(Seven.valor, 7)
-    assertEquals(Seven.clasificacion, Impar)
+  test("Seven tiene order 7, chipValue 7, classification Impar") {
+    assertEquals(Seven.order, 7)
+    assertEquals(Seven.chipValue, 7)
+    assertEquals(Seven.classification, Odd)
   }
 
-  test("Eight tiene orden 8, valor 8, clasificacion Par") {
-    assertEquals(Eight.orden, 8)
-    assertEquals(Eight.valor, 8)
-    assertEquals(Eight.clasificacion, Par)
+  test("Eight tiene order 8, chipValue 8, classification Par") {
+    assertEquals(Eight.order, 8)
+    assertEquals(Eight.chipValue, 8)
+    assertEquals(Eight.classification, Even)
   }
 
-  test("Nine tiene orden 9, valor 9, clasificacion Impar") {
-    assertEquals(Nine.orden, 9)
-    assertEquals(Nine.valor, 9)
-    assertEquals(Nine.clasificacion, Impar)
+  test("Nine tiene order 9, chipValue 9, classification Impar") {
+    assertEquals(Nine.order, 9)
+    assertEquals(Nine.chipValue, 9)
+    assertEquals(Nine.classification, Odd)
   }
 
-  test("Ten tiene orden 10, valor 10, clasificacion Par") {
-    assertEquals(Ten.orden, 10)
-    assertEquals(Ten.valor, 10)
-    assertEquals(Ten.clasificacion, Par)
+  test("Ten tiene order 10, chipValue 10, classification Par") {
+    assertEquals(Ten.order, 10)
+    assertEquals(Ten.chipValue, 10)
+    assertEquals(Ten.classification, Even)
   }
 
-  test("Jack tiene orden 11, valor 10, clasificacion Figura") {
-    assertEquals(Jack.orden, 11)
-    assertEquals(Jack.valor, 10)
-    assertEquals(Jack.clasificacion, Figura)
+  test("Jack tiene order 11, chipValue 10, classification Figura") {
+    assertEquals(Jack.order, 11)
+    assertEquals(Jack.chipValue, 10)
+    assertEquals(Jack.classification, Figure)
   }
 
-  test("Queen tiene orden 12, valor 10, clasificacion Figura") {
-    assertEquals(Queen.orden, 12)
-    assertEquals(Queen.valor, 10)
-    assertEquals(Queen.clasificacion, Figura)
+  test("Queen tiene order 12, chipValue 10, classification Figura") {
+    assertEquals(Queen.order, 12)
+    assertEquals(Queen.chipValue, 10)
+    assertEquals(Queen.classification, Figure)
   }
 
-  test("King tiene orden 13, valor 10, clasificacion Figura") {
-    assertEquals(King.orden, 13)
-    assertEquals(King.valor, 10)
-    assertEquals(King.clasificacion, Figura)
+  test("King tiene order 13, chipValue 10, classification Figura") {
+    assertEquals(King.order, 13)
+    assertEquals(King.chipValue, 10)
+    assertEquals(King.classification, Figure)
   }
 
   test("Las cuatro pintas son distintas entre sí") {

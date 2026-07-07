@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 import munit.FunSuite
-import rango.{Two, Three, Four, Five, Six, Ace, King}
-import pinta.{Hearts, Diamonds, Spades, Clubs}
+import rank.{Two, Three, Four, Five, Six, Ace, King}
+import suit.{Hearts, Diamonds, Spades, Clubs}
 import joker._
 import exceptions._
 

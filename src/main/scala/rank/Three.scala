@@ -1,10 +1,10 @@
 package cl.uchile.dcc
-package rango
+package rank
 import joker.Joker
 
 /** Rank Three: order 3, chip value 3, classification Impar. */
 object Three extends Rank {
-  val orden: Int = 3
-  val valor: Int = 3
-  val clasificacion: ClasificacionRango = Impar
+  val order: Int = 3
+  val chipValue: Int = 3
+  val classification: RankClassification = Odd
 }

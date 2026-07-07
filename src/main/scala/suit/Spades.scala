@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package pinta
+package suit
 
 /** The Spades suit. */
-object Spades extends Pinta
+object Spades extends Suit

@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 import joker.*
-import pinta.{Clubs, Diamonds, Hearts, Spades}
-import rango.*
+import suit.{Clubs, Diamonds, Hearts, Spades}
+import rank.*
 
 import munit.FunSuite
 

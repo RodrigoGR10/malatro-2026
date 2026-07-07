@@ -2,8 +2,8 @@ package cl.uchile.dcc
 
 import joker.*
 import munit.FunSuite
-import pinta.*
-import rango.*
+import suit.*
+import rank.*
 
 class ScoreCalculatorTest extends FunSuite {
   test("calculates the project annex straight flush example") {

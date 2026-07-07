@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package rango
+package rank
 
 /** Classification for face card ranks: Jack, Queen, and King. */
-object Figura extends ClasificacionRango
+object Figure extends RankClassification

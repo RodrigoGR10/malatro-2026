@@ -1,9 +1,9 @@
 package cl.uchile.dcc
-package pinta
+package suit
 import joker.Joker
 
 /** Represents the suit of a playing card. */
-trait Pinta {
+trait Suit {
   /**
    * Delegates to the joker so it can apply its own effect for this suit.
    *

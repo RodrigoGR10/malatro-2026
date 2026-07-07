@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package joker
-import rango.Rank
-import pinta.Pinta
+import rank.Rank
+import suit.Suit
 import combinations.PokerCombination
 
 /**
@@ -29,7 +29,7 @@ trait Joker {
    * @param score the current score to update
    * @return the updated score
    */
-  def affectSuit(suit: Pinta, score: Score): Score = score
+  def affectSuit(suit: Suit, score: Score): Score = score
 
   /**
    * Applies this joker's effect when scoring a poker combination, if any.

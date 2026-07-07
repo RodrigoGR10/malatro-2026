@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package rango
+package rank
 import joker.Joker
 
 /**
@@ -7,11 +7,11 @@ import joker.Joker
  */
 trait Rank {
   /** Numeric order of the rank, used to detect straights. */
-  val orden: Int
+  val order: Int
   /** Chip value contributed by this rank. */
-  val valor: Int
+  val chipValue: Int
   /** Classification of the rank. */
-  val clasificacion: ClasificacionRango
+  val classification: RankClassification
 
   /**
    * Adds this rank's chip value to the score, then delegates to the
@@ -22,7 +22,7 @@ trait Rank {
    * @return the updated score
    */
   def applyScore(score: Score, j: Joker): Score = {
-    score.chips = score.chips + valor
+    score.chips = score.chips + chipValue
     j.affectRank(this, score)
   }
 }

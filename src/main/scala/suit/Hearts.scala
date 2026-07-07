@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package pinta
+package suit
 
 /** The Hearts suit. */
-object Hearts extends Pinta
+object Hearts extends Suit

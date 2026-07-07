@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package rango
+package rank
 
 /** Classification for even ranks: 2, 4, 6, 8 and 10. */
-object Par extends ClasificacionRango
+object Even extends RankClassification

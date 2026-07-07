@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-import rango.{Rank, Ace}
+import rank.{Rank, Ace}
 import scala.collection.mutable
 
 /**
@@ -118,13 +118,13 @@ object PokerHelpers {
     else {
       var normal: List[Int] = List.empty
       for card <- cards do
-        if !normal.contains(card.rank.orden) then
-          normal = normal :+ card.rank.orden
+        if !normal.contains(card.rank.order) then
+          normal = normal :+ card.rank.order
       normal = normal.sorted
 
       var aceLow: List[Int] = List.empty
       for card <- cards do
-        val order = if card.rank == Ace then 1 else card.rank.orden
+        val order = if card.rank == Ace then 1 else card.rank.order
         if !aceLow.contains(order) then
           aceLow = aceLow :+ order
       aceLow = aceLow.sorted

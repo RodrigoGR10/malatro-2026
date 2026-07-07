@@ -4,8 +4,8 @@ import controller.GameController
 import exceptions.InvalidTransitionException
 import joker.*
 import munit.FunSuite
-import pinta.*
-import rango.*
+import suit.*
+import rank.*
 
 class GameControllerTest extends FunSuite {
   private def straightFlushHand(): Hand =

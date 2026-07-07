@@ -1,7 +1,6 @@
 package cl.uchile.dcc
 import exceptions._
 import joker._
-import combinations._
 import observer.BaseSubject
 
 /**

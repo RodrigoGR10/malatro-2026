@@ -33,7 +33,7 @@ class Card(private var _rank: Rank, private var _suit: Suit) {
   def applyScore(score: Score, jokers: List[Joker]): Score = {
     score.chips = score.chips + rank.chipValue
     for joker <- jokers do
-      joker.affectRank(rank, score)
+      rank.applyScore(score, joker)
       suit.applyScore(score, joker)
     score
   }

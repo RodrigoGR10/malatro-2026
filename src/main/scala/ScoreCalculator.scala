@@ -23,5 +23,5 @@ object ScoreCalculator:
     for card <- cards do
       card.applyScore(score, jokers)
     for joker <- jokers do
-      joker.affectCombination(combination, score)
+      combination.applyScore(score, joker)
     score.chips * score.mult

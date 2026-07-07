@@ -7,8 +7,8 @@ El proyecto Malatro es un juego de cartas donde el jugador forma manos de póker
 ## Organización del código
 ```
 src/main/scala/
-├── rango/            # Rangos y clasificaciones
-├── pinta/            # Pintas de cartas
+├── rank/            # Rangos y clasificaciones
+├── suit/            # Pintas de cartas
 ├── joker/            # Jokers activos
 ├── combinations/     # Combinaciones de poker
 ├── controller/       # Controlador y estados del juego

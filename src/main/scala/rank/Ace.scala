@@ -1,9 +1,8 @@
 package cl.uchile.dcc
 package rank
-import joker.Joker
 
 /**
- * Rank Ace: order 14, chip value 11, classification Impar.
+ * Rank Ace: order 14, chip value 11, classification Odd.
  *
  * The Ace can act as order 1 or 14 when detecting straights.
  */

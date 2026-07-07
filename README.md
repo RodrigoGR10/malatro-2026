@@ -7,52 +7,80 @@ El proyecto Malatro es un juego de cartas donde el jugador forma manos de póker
 ## Organización del código
 ```
 src/main/scala/
-├── rango/                  # Rangos de cartas y su clasificación
-├── pinta/                  # Pintas de cartas
-├── joker/                  # Jokers disponibles
-├── combinations/           # Combinaciones de póker, helpers y evaluador
-├── exceptions/             # Excepciones del juego
-├── Card.scala              # Carta individual
-├── Score.scala             # Puntaje de una jugada
-├── Hand.scala              # Mano del jugador
+├── rango/            # Rangos y clasificaciones
+├── pinta/            # Pintas de cartas
+├── joker/            # Jokers activos
+├── combinations/     # Combinaciones de poker
+├── controller/       # Controlador y estados del juego
+├── observer/         # Patron Observer
+├── exceptions/       # Excepciones
+├── Card.scala
+├── Hand.scala
+├── PokerHand.scala
+├── PokerHelpers.scala
+├── Score.scala
+└── ScoreCalculator.scala
+
 src/test/scala/
-├── MalatroTest.scala            # Tests de entidades base: Score, Card, rangos, pintas y Jokers
-├── PokerCombinationTest.scala   # Tests de combinaciones, prioridad y casos con As
-├── HandExceptionTest.scala     # Tests de excepciones: playHand, discardHand y límites
-├──HandTest.scala               # Tests de operaciones de la mano del jugador
-└── ScoreTest.scala             # Tests de applyScore en rangos, pintas, combinaciones y cartas
+├── MalatroTest.scala
+├── PokerCombinationTest.scala
+├── HandTest.scala
+├── HandExceptionTest.scala
+├── ScoreTest.scala
+├── ScoreCalculatorTest.scala
+├── GameControllerTest.scala
+└── TemplateConfigurationSmokeTest.scala
 ```
+# Componentes del Juego
+El proyecto modela cartas, rangos, pintas, Jokers, manos, combinaciones de poker, puntaje y controlador.
+Una mano puede tener hasta 8 cartas y 2 Jokers activos. En cada ronda el jugador tiene hasta 3 jugadas y 3 descartes. Cada jugada o descarte debe usar entre 1 y 5 cartas.
+El puntaje objetivo de la partida es 1000.
 
-## Decisiones de diseño
-Rangos y pintas son `object`, pues un rango o una pinta siempre representan lo mismo (mismo orden, valor y clasificación), así que tiene sentido modelarlos como objetos fijos en vez de crear instancias nuevas cada vez.
-`PokerHelpers` concentra toda la lógica de validación de combinaciones en un solo lugar, evitando duplicación entre los distintos objetos de combinación.
-`PokerCombination` permite que cada combinación implemente su propia validación de forma independiente, sin necesidad de un único método gigante con condicionales.
+# Cálculo de Puntaje
+ScoreCalculator calcula el puntaje completo de una jugada:
+1. Detecta la mejor combinación de poker.
+2. Usa el puntaje base de esa combinación.
+3. Suma los chips de cada carta jugada una sola vez.
+4. Aplica los efectos de los Jokers activos.
+5. Retorna chips * multiplicador.
 
-### Cálculo de puntaje con Jokers (double dispatch)
-El cálculo de puntaje con Jokers se implementó usando double dispatch.
-El trait `Joker` define tres métodos especializados: `affectRank`, `affectSuit` y `affectCombination`, uno por cada jerarquía que un Joker puede afectar (Rango, Pinta y Combinación de póker). Cada uno tiene una implementación por defecto que retorna el puntaje sin cambios.
-`Rank.applyScore`, `Pinta.applyScore` y `PokerCombination.applyScore` realizan el primer dispatch: suman su puntaje base (chips/multiplicador) y delegan en el Joker recibido, llamando a `j.affectRank(this, score)` (o el método correspondiente según la jerarquía). El segundo dispatch ocurre al resolver cuál Joker concreto ejecuta ese método.
-Para evitar duplicación, las implementaciones de `applyScore` en `Rank`, `Pinta` y `PokerCombination` se definen directamente en el trait, y cada objeto concreto (`Ace`, `Two`, `Hearts`, `Diamonds`, `Straight`, `Flush`, etc.) las hereda.
-Cada Joker concreto sobrescribe únicamente el método relevante a su efecto:
-- `GreedyJoker` sobrescribe `affectSuit`: suma +3 al multiplicador si la pinta recibida es Diamantes.
-- `EvenSteven` sobrescribe `affectRank`: suma +4 al multiplicador si la clasificación del rango recibido es Par.
-- `ScaryFace` sobrescribe `affectRank`: suma +30 a los chips si la clasificación del rango recibido es Figura.
-- `DeviousJoker` sobrescribe `affectCombination`: suma +100 a los chips si la combinación recibida es Straight.
+# Combinaciones
+Las combinaciones se evalúan en orden de prioridad:
+StraightFlush > Flush > Straight > ThreeOfAKind > Pair > HighCard
 
-De esta forma, es el propio Joker quien decide su efecto según el objeto (rango, pinta o combinación) que recibe como parámetro. Esto permite agregar nuevos Jokers en el futuro sin modificar el código existente de rangos, pintas o combinaciones.
-`Card.applyScore` recibe una lista de jokers e itera sobre ella: por cada joker activo, aplica primero la interacción del rango (`rank.applyScore`) y luego la de la pinta (`suit.applyScore`) con ese joker.
+# Jokers implementados:
+GreedyJoker: suma +3 al multiplicador por cada Diamante.
+EvenSteven: suma +4 al multiplicador por cada rango par.
+ScaryFace: suma +30 chips por cada figura.
+DeviousJoker: suma +100 chips si hay Straight o StraightFlush.
 
-### Controlador del juego (State y Observer)
-El controlador se implementó usando el patrón **State** para modelar las fases de la partida: `PreGame`, `PlayerTurn` y `RoundEnd`. La clase base `GameState` define cada acción posible (`startGame`, `playHand`, `discardHand`) con una implementación por defecto que lanza una excepción, y cada estado concreto sobrescribe únicamente las transiciones que le son válidas. Esto evita condicionales para decidir qué acción es válida en cada momento, ya que cada estado conoce sus propias transiciones.
-Para notificar el fin de la partida se implementó el patrón **Observer**: `Hand` actúa como `Subject` y `GameController` se suscribe como `Observer`. Cuando el jugador agota sus jugadas disponibles, `Hand` notifica automáticamente a sus observadores sin conocer los detalles del controlador, lo que desacopla el modelo del control del flujo del juego.
+# Controlador
+El controlador usa el patron State para representar el flujo de la partida:
+PreGame -> PlayerTurn -> RoundEnd
 
-### Otras decisiones
-Las excepciones están organizadas en el paquete `exceptions` y los jokers en el paquete `joker`, siguiendo el principio de una clase/trait por archivo.
-`equals` en `Card` y `Score` permite comparar instancias distintas que representen la misma carta o el mismo puntaje, lo cual es necesario para los tests.
+1. PreGame: Estado inicial.
+2. PlayerTurn: Permite jugar y descartar cartas.
+3. RoundEnd: Estado final cuando no quedan jugadas.
+
+El controlador acumula el puntaje con totalScore, guarda el puntaje de la última jugada con lastPlayScore y entrega el resultado mediante resultMessage.
+Si totalScore >= 1000, la partida se gana. En caso contrario, se pierde.
+
+# Patrones de Diseño:
+Se usan los siguientes patrones:
+1. State: para modelar las fases de la partida.
+2. Observer: Hand notifica al GameController cuando se acaban las jugadas.
+3. Double dispatch: para aplicar los efectos de los Jokers sobre rangos, pintas y combinaciones.
+4. Singleton: rangos, pintas y Jokers se modelan como object.
+
+# Decisiones de Diseño
+PokerHelpers concentra validaciones comunes para evitar duplicación entre combinaciones.
+PokerHand decide la mejor combinación siguiendo el orden de prioridad.
+ScoreCalculator está separado de Hand para que el cálculo de puntaje tenga una responsabilidad clara y sea fácil de testear.
+Se usan excepciones personalizadas para acciones inválidas, como jugar demasiadas cartas, exceder los descartes o usar índices inválidos.
+
 
 ## Testing
-Se cubre creación e igualdad de objetos, validación de cada combinación de póker con casos positivos y negativos, prioridad entre combinaciones cuando una mano satisface más de una, el comportamiento dual del As en escaleras (orden 1 y 14), todas las operaciones de la mano del jugador junto con sus excepciones (incluyendo `discardHand`), y el cálculo de puntaje de rangos, pintas, combinaciones y cartas con los efectos de cada Joker mediante double dispatch.
-El proyecto alcanza un 97% de cobertura de líneas en `src/main/scala`.
+Los tests cubren las entidades principales del modelo, incluyendo cartas, rangos, pintas, puntaje y Jokers. También se prueban las combinaciones de poker, su orden de prioridad, los casos especiales del As en escaleras, las operaciones de `Hand` y sus excepciones. Además, se agregan tests para `ScoreCalculator` y tests para el controlador, verificando las transiciones `PreGame`, `PlayerTurn` y `RoundEnd`, el descarte de cartas, el intento de jugar antes de iniciar la partida, y los casos de victoria o derrota según el puntaje objetivo de `1000`.
 
 ## Diagrama de estados
 
@@ -60,7 +88,7 @@ El proyecto alcanza un 97% de cobertura de líneas en `src/main/scala`.
 
 ### Explicación
 
-El diagrama comienza en `Start`, que representa el inicio de la partida. Desde allí se pasa a `StartRound`, donde se prepara la ronda y se deja el juego listo para actuar. Luego se entra a `PlayerTurn`, que es el estado principal en el que el jugador decide qué hacer.
-Desde `PlayerTurn` pueden ocurrir dos transiciones principales: `playHand` y `discardHand`. Ambas representan acciones del jugador sobre su mano, y deben respetar las restricciones del proyecto: entre 1 y 5 cartas por acción, con un máximo de 3 jugadas y 3 descartes por ronda. Mientras todavía existan jugadas disponibles, el flujo vuelve a `PlayerTurn` para permitir una nueva decisión.
-Cuando ya no quedan jugadas disponibles, la partida pasa a `RoundEnd`. En ese estado se evalúa si el puntaje alcanzado es suficiente para ganar. Si el puntaje mínimo se alcanzó antes de quedarse sin jugadas, la transición va a `Win`. Si no se alcanzó, la transición va a `Lose`.
-Tanto `Win` como `Lose` conducen a `Finish`, que representa el término definitivo de la partida.
+El diagrama representa el flujo principal de una partida. El juego comienza en `PreGame`, estado en el que la partida todavía no ha iniciado. Al ejecutar `startGame`, el controlador cambia a `PlayerTurn`, que es el estado donde el jugador puede realizar sus acciones principales.
+Desde `PlayerTurn`, el jugador puede ejecutar `playHand` para jugar un conjunto de cartas o `discardHand` para descartar cartas. Ambas acciones deben respetar las reglas del juego: se debe seleccionar al menos 1 carta y como máximo 5 cartas. Además, la mano permite hasta 3 jugadas y hasta 3 descartes.
+Mientras el jugador aún tenga jugadas disponibles, el flujo se mantiene en `PlayerTurn`. Cuando se utiliza la última jugada disponible, `Hand` notifica al `GameController` mediante el patron Observer, y el controlador pasa a `RoundEnd`.
+En `RoundEnd`, la partida ya termino. Si el puntaje acumulado (`totalScore`) es mayor o igual al puntaje objetivo (`targetScore`, por defecto 1000), el resultado es victoria. Si no se alcanza ese puntaje, el resultado es derrota. Este resultado se puede consultar mediante `resultMessage`.
